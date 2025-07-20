@@ -41,7 +41,7 @@ def get_db():
 @app.post('/blog', status_code=status.HTTP_201_CREATED, tags=['blogs'])
 def create(request: schemas.Blog, db: Session = Depends(get_db)):
     # return db
-    new_blog = models.Blog(title = request.title, body=request.body)
+    new_blog = models.Blog(title = request.title, body=request.body, user_id=1)
     db.add(new_blog)
     db.commit()
     db.refresh(new_blog)
@@ -88,6 +88,7 @@ pwd_cxt = CryptContext(schemes=["bcrypt"], deprecated="auto")
 @app.post('/user', response_model=schemas.ShowUser, tags=['users'])
 def create_user(request: schemas.User, db: Session = Depends(get_db)):
     # return request
+    
     # new_user = models.User(name = request.name, email=request.email, password=request.password)
 
     # hashedPassword = pwd_cxt.hash(request.password)
