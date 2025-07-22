@@ -5,7 +5,7 @@ from .database import engine, SessionLocal
 from sqlalchemy.orm import Session 
 from typing import List
 from passlib.context import CryptContext
-from blog.router import blog, user
+from blog.router import blog, user, authentication
 
 app = FastAPI()
 
@@ -26,6 +26,7 @@ app = FastAPI()
 #     return {request}
 
 models.Base.metadata.create_all(bind=engine)
+app.include_router(authentication.router)
 app.include_router(blog.router)
 app.include_router(user.router)
 

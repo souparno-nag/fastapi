@@ -36,3 +36,7 @@ class ShowBlog(Blog):
         orm_mode = True  # This allows Pydantic to read data from ORM models
         # It tells Pydantic to treat the SQLAlchemy model as a dictionary
         # and convert it to a Pydantic model.
+
+class Login(BaseModel):
+    username: str
+    password: str
